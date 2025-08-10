@@ -106,3 +106,4 @@ source $ZSH/oh-my-zsh.sh
 export PATH=~/.local/bin:$PATH
 export UV_LINK_MODE=copy
 
+source $HOME/.profile
