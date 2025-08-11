@@ -50,8 +50,8 @@ Use the standard Build Plan Template format with:
 
 ## File Naming
 - Use a consistent naming convention for all plan files
-- The current plan will be named `eventflow.plan.md`
-- Prior plans should be renamed with their version numbers.
+- The current plan will be named 'echoflow.plan.md'
+- There should be one active build plan and all other prior plans should be archived. Prior plans should be renamed with their version numbers.
 
 Please analyze @CLAUDE.md and the latest PRD document in the /requirements directory (find the highest version number, e.g. v3 is newer than v1) and create a comprehensive build plan.
 

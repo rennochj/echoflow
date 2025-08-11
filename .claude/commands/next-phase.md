@@ -68,6 +68,8 @@ I will wait for your explicit approval before starting any Phase [N+1] work.
 4. Request specific approvals
 5. DO NOT start next phase work without explicit confirmation
 6. If any validation fails, report issues and recommendations
+7. At the end of the current phase, update the plan with the status of all phases and steps.
+8. Update the project README.md file with the latest instructions on usage and features.
 
 ## Response Options
 After running this command, respond with:

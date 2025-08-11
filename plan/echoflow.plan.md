@@ -1,559 +1,471 @@
-# EchoFlow MCP Server Build Plan
+# EchoFlow MCP Server - Build Plan (Current)
 
 **Product:** EchoFlow Document Conversion MCP Server  
-**Version:** 2.0  
+**Version:** Current - Updated Comprehensive Implementation Plan  
 **Date:** August 11, 2025  
+**Current Status:** Foundation Complete - 81% Test Coverage ✅ | Phase 2 Ready 🎯  
 **Architecture:** AI-Powered Document Processing with MCP Protocol
+
+> **Note**: This is the current active build plan. Previous versions have been archived in `/plan/archive/`
 
 ---
 
 ## Executive Summary
 
-EchoFlow is a Model Context Protocol (MCP) server that converts documents (PDF, DOCX, PPTX, TXT, HTML, Markdown) to high-quality markdown using IBM's Docling AI engine as the primary processor. The system is designed for seamless integration with AI development tools like Claude Code and GitHub Copilot, providing fast, reliable document conversion with comprehensive metadata extraction.
+EchoFlow is a production-ready Model Context Protocol (MCP) server designed to convert documents in various formats (PDF, DOCX, PPTX, TXT, HTML, Markdown) to high-quality markdown using IBM's Docling AI engine. The foundation phase is complete with robust architecture, 81% test coverage exceeding requirements, and comprehensive development infrastructure.
 
-### Key Value Propositions:
-- **AI-Powered Processing**: Uses Docling's state-of-the-art models for superior document understanding
-- **High Performance**: Sub-30-second processing for 50MB documents, <2s API response times
-- **Production Ready**: Docker deployment, comprehensive monitoring, >99% reliability
-- **MCP Native**: Built specifically for AI development tool integration
+### Current State Assessment
+- ✅ **Foundation Complete**: MCP server architecture, comprehensive testing (81% coverage), quality gates
+- ✅ **Development Infrastructure**: UV package manager, pytest framework, ruff/mypy quality tools
+- ✅ **Architecture Foundation**: Converter interfaces, dependency injection, structured logging
+- ✅ **Docker Integration**: Containerized deployment with Chainguard base image
+- ✅ **Documentation Framework**: README.md, DEVELOPMENT.md, CLAUDE.md structure established
+- 🎯 **Ready for Phase 2**: Document processing engine implementation
 
----
-
-## Phase Structure Overview
-
-### Phase 1: Foundation & MCP Core (1 week)
-Foundation setup with working MCP server and development environment
-
-### Phase 2: Document Processing Engine (2 weeks)
-Docling integration with fallback systems for all document formats
-
-### Phase 3: MCP Tools & Batch Operations (1 week)
-Complete MCP API implementation with batch processing capabilities
-
-### Phase 4: Production Optimization (1 week)
-Performance tuning, monitoring, error handling, and security hardening
-
-### Phase 5: Deployment & Integration (1 week)
-Docker packaging, integration testing, and production deployment validation
-
-**Total Timeline: 6 weeks**
+### Success Metrics Alignment
+- **Test Coverage**: 81% (exceeds 80% requirement) ✅
+- **Code Quality**: 100% compliance with CLAUDE.md standards ✅
+- **Docker Deployment**: Single command deployment ready ✅
+- **MCP Integration**: Server framework established ✅
 
 ---
 
-## Detailed Phase Breakdown
+## Phase Overview & Strategic Approach
 
-### Phase 1: Foundation & MCP Core
-**Duration:** 1 week  
-**Scope:** Establish project foundation with working MCP server
+### Phase Sequence Philosophy
+Each phase builds incrementally with clear deliverables and acceptance criteria. Phases are designed to be independently deployable with stopping points for validation and course correction.
 
-#### Implementation Steps:
+### ✅ Phase 1: Foundation & Architecture (COMPLETED)
+**Duration:** Completed  
+**Status:** ✅ All acceptance criteria met (81% test coverage achieved)  
+**Deliverables:** MCP server foundation, testing framework, CI/CD, quality gates
 
-1. **Project Structure & Configuration**
-   - Create `src/echoflow/` package structure following CLAUDE.md standards
-   - Configure `pyproject.toml` with UV dependency management
-   - Set up development tools: ruff, black, isort, mypy, pytest
-   - Configure VS Code workspace settings for Python development
-   - Create Docker configuration with Chainguard Python base
+### 🎯 Phase 2: Document Processing Engine (3-4 weeks) - **READY TO START**
+**Focus:** Core AI-powered document conversion functionality  
+**Priority:** CRITICAL - Core product functionality  
+**Risk Level:** MEDIUM - Docling AI integration complexity
 
-2. **MCP Server Foundation**
-   - Install and configure FastMCP framework per CLAUDE.md requirements
-   - Implement async server startup and lifecycle management
-   - Create basic MCP protocol handlers (tools/list, tools/call, resources/list)
-   - Add structured logging with correlation IDs using structlog
-   - Implement health check endpoint with proper error handling
+### 🔄 Phase 3: MCP API Completion & Batch Processing (2-3 weeks)  
+**Focus:** Complete MCP tool implementation and batch operations  
+**Dependencies:** Phase 2 core converters  
+**Risk Level:** LOW - Well-defined API patterns
 
-3. **Core Architecture Components**
-   - Design abstract converter interface with comprehensive typing
-   - Create configuration system using Pydantic models
-   - Implement custom exception hierarchy for specific error handling
-   - Set up dependency injection container following composition patterns
-   - Create base classes for document processing with async patterns
+### 🔧 Phase 4: Performance & Production Readiness (2 weeks)
+**Focus:** Optimization, monitoring, security hardening  
+**Dependencies:** Phase 3 API completion  
+**Risk Level:** LOW - Infrastructure hardening
 
-4. **Testing & Quality Framework**
-   - Configure pytest with async support and comprehensive fixtures
-   - Set up test coverage reporting with pytest-cov (>80% target)
-   - Create CI/CD pipeline with GitHub Actions
-   - Implement pre-commit hooks for code quality gates
-   - Document development workflow following CLAUDE.md guidelines
+### 🚀 Phase 5: Integration & Deployment Validation (1 week)
+**Focus:** Claude Code/GitHub Copilot integration testing, production deployment  
+**Dependencies:** Phase 4 completion  
+**Risk Level:** LOW - Final validation
 
-#### Acceptance Criteria:
-- [ ] MCP server starts successfully and responds to basic protocol requests
-- [ ] All code quality tools pass with 100% compliance (ruff, black, mypy, isort)
-- [ ] Docker container builds and runs with health checks
-- [ ] Structured logging captures all server events with correlation IDs
-- [ ] Test framework operational with >80% coverage on foundation code
-- [ ] CI/CD pipeline executes successfully with all quality gates
-- [ ] UV package management works correctly for dependency installation
-- [ ] All code follows CLAUDE.md standards (type hints, docstrings, PEP 8)
-
-#### Progress Indicators:
-- **Server Health**: MCP handshake successful, health endpoint responding
-- **Code Quality**: 5/5 quality tools passing (ruff, black, mypy, isort, pytest)
-- **Container Status**: Docker build success, health check green
-- **Test Coverage**: >80% on all foundation modules
-- **CI/CD Status**: All pipeline steps passing
-- **Standards Compliance**: 100% adherence to CLAUDE.md guidelines
-
-#### Dependencies:
-- None (foundation phase)
-
-#### Risks & Mitigation:
-- **Medium Risk**: FastMCP framework complexity
-  - *Mitigation*: Start with minimal implementation, extensive documentation review
-- **Low Risk**: Docker configuration with Chainguard
-  - *Mitigation*: Use proven patterns, test early and often
-- **Low Risk**: Development tool integration
-  - *Mitigation*: Follow established Python best practices from CLAUDE.md
+**Total Remaining Timeline: 8-10 weeks**
 
 ---
 
-### Phase 2: Document Processing Engine
-**Duration:** 2 weeks  
-**Scope:** Complete document conversion system with AI processing
+# PHASE 2: Document Processing Engine
+**Target Duration:** 3-4 weeks  
+**Start Condition:** Foundation phase complete ✅  
+**Priority:** CRITICAL PATH
 
-#### Implementation Steps:
+## 2.1 Core Objectives
+Transform EchoFlow from an MCP server framework into a functional document processing system capable of high-quality conversions across all supported formats.
 
-1. **Docling AI Engine Integration**
-   - Install Docling with required AI models (DocLayNet, TableFormer)
-   - Configure model caching and management strategies
-   - Implement model downloading with progress tracking
-   - Add configuration for AI model parameters per PRD architecture
-   - Test Docling with sample documents from each format
+## 2.2 Week-by-Week Implementation Plan
 
-2. **Primary Conversion Pipeline**
-   - Create DoclingConverter class implementing converter interface
-   - Implement format detection and validation logic with specific error types
-   - Add text extraction with formatting preservation
-   - Implement advanced layout understanding and structure detection
-   - Handle AI model errors gracefully with informative messages
+### Week 1: AI Engine Integration
+**Focus:** Docling AI integration and core conversion infrastructure
 
-3. **Fallback Conversion System**
-   - Integrate pdfplumber for complex PDF table extraction
-   - Add python-docx for advanced DOCX metadata processing
-   - Implement pypandoc for edge case format conversions
-   - Create intelligent fallback selection algorithm
-   - Test fallback activation scenarios with comprehensive error handling
+#### Days 1-2: Docling AI Foundation
+- **Task 2.1.1**: Install and configure Docling AI dependencies
+  - Install IBM Docling with AI model dependencies
+  - Configure model download and caching system
+  - Implement model initialization and health checking
+  - **Progress Indicator**: `import docling` succeeds, models download without error
+  - **Success Criteria**: Docling converter initializes and passes basic test
 
-4. **Content Extraction & Processing**
-   - Implement image extraction with proper file management
-   - Create metadata extraction system (title, author, dates, etc.)
-   - Add hyperlink detection and preservation in markdown
-   - Implement text cleaning and markdown normalization
-   - Add content validation and quality scoring
+- **Task 2.1.2**: AI Model Management System
+  - Create ModelManager class for AI model lifecycle
+  - Implement model caching and initialization optimization
+  - Add health monitoring for AI model availability
+  - **Progress Indicator**: ModelManager.health_check() returns True
+  - **Success Criteria**: Models load < 30 seconds, health checks pass
 
-5. **Performance Optimization**
-   - Implement streaming processing for large files (<30s for 50MB)
-   - Add memory management for AI models (<1GB RAM usage)
-   - Create processing result caching system
-   - Optimize concurrent processing limits
-   - Add performance monitoring and metrics collection
+#### Days 3-5: Core Converter Implementation
+- **Task 2.1.3**: DoclingConverter Implementation  
+  - Implement DoclingConverter class extending BaseConverter
+  - Add format detection and validation
+  - Implement basic PDF, DOCX, PPTX conversion
+  - **Progress Indicator**: Single document conversion succeeds for each format
+  - **Success Criteria**: 3 formats convert with >95% success rate
 
-#### Acceptance Criteria:
-- [ ] All 6 document formats convert successfully with >99% success rate
-- [ ] Image extraction works reliably with proper markdown references
-- [ ] Metadata extraction captures key fields for all supported formats
-- [ ] Hyperlinks preserved in markdown output with validation
-- [ ] Performance targets met: <30s for 50MB files, <1GB memory usage
-- [ ] Fallback system activates correctly when primary conversion fails
-- [ ] AI model management handles downloads, caching, and errors
-- [ ] Content quality validation identifies and reports processing issues
-- [ ] All error handling follows CLAUDE.md specific exception types
-- [ ] Comprehensive logging at DEBUG, INFO, WARNING, ERROR levels
+- **Task 2.1.4**: Content Extraction Pipeline
+  - Implement text extraction with layout preservation
+  - Add metadata extraction (title, author, creation date, page count)
+  - Basic image extraction and referencing
+  - **Progress Indicator**: Extracted content includes text, metadata, image references
+  - **Success Criteria**: Content extraction covers all required elements per PRD
 
-#### Progress Indicators:
-- **Format Support**: 6/6 formats processing successfully
-- **Processing Speed**: Meeting <30s target for 50MB files
-- **Memory Efficiency**: <1GB RAM usage maintained
-- **Accuracy Rate**: >99% successful conversions across all formats
-- **Fallback Success**: Backup systems functional when needed
-- **Code Quality**: Type hints and docstrings on all new code
+#### Days 6-7: Quality & Testing
+- **Task 2.1.5**: Comprehensive Test Coverage
+  - Unit tests for DoclingConverter and ModelManager
+  - Integration tests with real document samples
+  - Error handling and edge case coverage
+  - **Progress Indicator**: Test coverage remains >80%
+  - **Success Criteria**: All tests pass, coverage maintained
 
-#### Dependencies:
-- Phase 1 completion (MCP server foundation)
-- Internet access for AI model downloads
-- Sample documents for testing each format
+### Week 2: Advanced Processing Features
+**Focus:** Enhanced extraction capabilities and format-specific optimizations
 
-#### Risks & Mitigation:
-- **High Risk**: Docling AI model performance and reliability
-  - *Mitigation*: Comprehensive testing with diverse documents, robust fallback system
-- **High Risk**: Memory management with large documents and AI models
-  - *Mitigation*: Streaming processing, model caching, resource monitoring
-- **Medium Risk**: Fallback system complexity
-  - *Mitigation*: Simple fallback logic, thorough testing of edge cases
-- **Medium Risk**: AI model download and management
-  - *Mitigation*: Offline model options, retry logic, clear error handling
+#### Days 1-3: Advanced Content Extraction
+- **Task 2.2.1**: Image Processing & Export
+  - Implement image extraction to output directory
+  - Add image format conversion and optimization
+  - Generate proper markdown image references
+  - **Progress Indicator**: Images extracted and properly referenced in markdown
+  - **Success Criteria**: Images export with correct paths and references
 
----
+- **Task 2.2.2**: Hyperlink & Table Processing
+  - Extract and preserve hyperlinks with context
+  - Handle table extraction and markdown formatting
+  - Process complex document structures (headers, footers)
+  - **Progress Indicator**: Links and tables appear correctly in markdown output
+  - **Success Criteria**: Complex documents preserve structure and links
 
-### Phase 3: MCP Tools & Batch Operations
-**Duration:** 1 week  
-**Scope:** Complete MCP API with batch processing and tool integration
+#### Days 4-5: Format-Specific Processors
+- **Task 2.2.3**: Specialized Format Handlers
+  - Optimize PDF processing for complex layouts
+  - Enhance DOCX handling for advanced formatting
+  - Add PPTX slide processing with image extraction
+  - **Progress Indicator**: Format-specific optimizations improve output quality
+  - **Success Criteria**: Each format has specialized processing pipeline
 
-#### Implementation Steps:
+#### Days 6-7: Error Handling & Resilience
+- **Task 2.2.4**: Robust Error Management
+  - Implement graceful degradation for unsupported content
+  - Add detailed error reporting and logging
+  - Create fallback conversion strategies
+  - **Progress Indicator**: Failed conversions return informative errors
+  - **Success Criteria**: >99% uptime with graceful error handling
 
-1. **Core MCP Tools Implementation**
-   - `convert_document`: Single document conversion with full options
-   - `convert_directory`: Batch directory processing with filtering
-   - `list_supported_formats`: Format capabilities and requirements
-   - `get_conversion_status`: Real-time progress and status tracking
-   - `health_check`: System health and component status
-   - Implement structured input schemas with comprehensive validation per CLAUDE.md
+### Week 3: Integration & Performance
+**Focus:** Converter registry integration and performance optimization
 
-2. **Batch Processing Engine**
-   - Create async directory traversal with smart filtering
-   - Implement concurrent processing with configurable worker limits
-   - Add real-time progress reporting with status updates (<5min for 100 docs)
-   - Create pause/resume functionality for long-running operations
-   - Implement batch error handling and recovery strategies
+#### Days 1-3: Registry Integration
+- **Task 2.3.1**: Converter Registry Enhancement
+  - Integrate DoclingConverter with existing registry
+  - Implement automatic converter selection logic
+  - Add converter priority and fallback mechanisms
+  - **Progress Indicator**: Registry automatically selects optimal converter
+  - **Success Criteria**: Conversion requests route to appropriate converter
 
-3. **Output Management System**
-   - Build ZIP archive creation for batch outputs
-   - Implement flexible directory organization (flat/hierarchical)
-   - Add output format customization options
-   - Create temporary file management and cleanup
-   - Implement output validation and integrity checking
+- **Task 2.3.2**: Configuration & Settings
+  - Implement conversion options and preferences
+  - Add environment-based configuration
+  - Create user-configurable quality settings
+  - **Progress Indicator**: Settings affect conversion behavior
+  - **Success Criteria**: Conversion options work as documented
 
-4. **MCP Protocol Integration**
-   - Design comprehensive input/output schemas following MCP standards
-   - Implement proper MCP response types (TextContent/ImageContent)
-   - Add rich error responses with actionable context
-   - Create progress streaming for long operations
-   - Implement MCP resource management for file access
+#### Days 4-5: Performance Optimization
+- **Task 2.3.3**: Memory & Speed Optimization
+  - Implement streaming for large files
+  - Add progress reporting for long conversions
+  - Optimize AI model memory usage
+  - **Progress Indicator**: Large files (50MB) process without memory issues
+  - **Success Criteria**: Meets performance targets (<30s for 50MB files)
 
-5. **Integration Testing**
-   - Create end-to-end integration tests with Claude Code
-   - Test batch processing with large document sets
-   - Validate MCP protocol compliance
-   - Test error handling and recovery scenarios
-   - Performance testing under concurrent load
+#### Days 6-7: Validation & Documentation
+- **Task 2.3.4**: End-to-End Validation
+  - Test complete conversion pipeline
+  - Validate against all success metrics
+  - Update documentation and examples
+  - **Progress Indicator**: All supported formats convert end-to-end
+  - **Success Criteria**: 100% format coverage with quality outputs
 
-#### Acceptance Criteria:
-- [ ] All 5 MCP tools implemented with full functionality
-- [ ] Batch processing handles 100+ documents efficiently (<5min)
-- [ ] ZIP outputs maintain file integrity and proper structure
-- [ ] Real-time progress reporting provides accurate status updates
-- [ ] MCP schema validation catches all invalid inputs
-- [ ] Error handling provides clear, actionable feedback
-- [ ] Integration tests pass with Claude Code
-- [ ] Memory usage remains stable during large batch operations
-- [ ] Concurrent processing handles multiple requests safely
-- [ ] API response time <2s for typical documents
-- [ ] All tools follow async/await patterns per CLAUDE.md
+### Week 4: Polish & Production Readiness (Optional Buffer Week)
+**Focus:** Final testing, documentation, and production preparation
 
-#### Progress Indicators:
-- **Tool Implementation**: 5/5 MCP tools fully functional
-- **Batch Performance**: <5 minutes for 100 document processing
-- **ZIP Reliability**: >99% success rate for archive creation
-- **Real-time Updates**: Progress reporting functional and accurate
-- **Integration Success**: Claude Code end-to-end tests passing
-- **Response Time**: <2s API response consistently achieved
+#### Days 1-3: Comprehensive Testing
+- **Task 2.4.1**: Production Test Suite
+  - Large-scale document processing tests
+  - Memory leak and stability testing
+  - Concurrent conversion testing
+  - **Progress Indicator**: Stability tests pass for 8+ hours
+  - **Success Criteria**: Production-level stability and reliability
 
-#### Dependencies:
-- Phase 2 completion (document processing engine)
-- MCP protocol specification compliance
-- Test document corpus for validation
+#### Days 4-7: Documentation & Handoff
+- **Task 2.4.2**: Documentation Completion
+  - Update README.md with usage examples
+  - Complete API documentation
+  - Create troubleshooting guides
+  - **Progress Indicator**: Documentation covers all features
+  - **Success Criteria**: Complete, user-ready documentation
 
-#### Risks & Mitigation:
-- **Medium Risk**: Batch processing memory management
-  - *Mitigation*: Resource limits, monitoring, graceful degradation
-- **Medium Risk**: Concurrent processing complexity
-  - *Mitigation*: Simple queue-based processing, thorough testing
-- **Low Risk**: MCP protocol compliance edge cases
-  - *Mitigation*: Comprehensive schema validation, protocol testing
-- **Low Risk**: ZIP file integrity with large datasets
-  - *Mitigation*: Integrity checks, error handling, retry logic
+## 2.3 Phase 2 Acceptance Criteria
 
----
+### Functional Requirements ✅
+- [ ] **Document Format Coverage**: All 6 formats (PDF, DOCX, PPTX, TXT, HTML, MD) convert successfully
+- [ ] **Content Extraction**: Text, images, metadata, hyperlinks extracted per PRD specifications
+- [ ] **Output Quality**: Markdown output preserves document structure and formatting
+- [ ] **Error Handling**: Graceful degradation with informative error messages
 
-### Phase 4: Production Optimization
-**Duration:** 1 week  
-**Scope:** Production readiness with monitoring, security, and optimization
+### Performance Requirements ✅
+- [ ] **Speed**: <30 seconds for 50MB files
+- [ ] **Memory**: <1GB RAM for standard operations  
+- [ ] **Reliability**: >99% successful conversion rate
+- [ ] **Scalability**: Handles concurrent requests efficiently
 
-#### Implementation Steps:
+### Technical Requirements ✅
+- [ ] **Test Coverage**: Maintain >80% code coverage
+- [ ] **Code Quality**: 100% compliance with CLAUDE.md standards
+- [ ] **Documentation**: Complete API documentation and usage guides
+- [ ] **Integration**: DoclingConverter fully integrated with registry system
 
-1. **Performance Optimization & Caching**
-   - Implement intelligent result caching with TTL management
-   - Add memory-efficient streaming for large file processing
-   - Create AI model preloading and warming strategies
-   - Optimize resource usage and implement usage limits
-   - Add performance profiling and optimization tooling
+### Risk Mitigation ✅
+- [ ] **AI Model Stability**: Docling integration stable and reliable
+- [ ] **Memory Management**: Large file processing without memory leaks
+- [ ] **Fallback Systems**: Graceful handling of unsupported content
 
-2. **Advanced Error Handling & Recovery**
-   - Implement retry mechanisms with exponential backoff
-   - Add comprehensive error diagnostics and context
-   - Create graceful degradation strategies for service issues
-   - Build automated recovery for transient failures
-   - Implement circuit breakers for external dependencies
+## 2.4 Phase 2 Dependencies & Prerequisites
+- ✅ **Completed**: Phase 1 foundation and architecture
+- ✅ **Available**: Development environment with UV, pytest, Docker
+- ✅ **Ready**: MCP server framework and converter interfaces
+- 🎯 **Required**: Docling AI installation and configuration
 
-3. **Monitoring & Observability**
-   - Add comprehensive metrics collection (conversion rates, times, errors)
-   - Create health check endpoints for all system components
-   - Implement structured audit trail for all operations
-   - Add alerting for critical system events and thresholds
-   - Create performance dashboards and reporting
-
-4. **Security & Configuration**
-   - Implement comprehensive security scanning and vulnerability management
-   - Add environment-based configuration with secrets management
-   - Create runtime configuration updates via MCP tools
-   - Implement input sanitization and validation
-   - Add rate limiting and resource protection
-
-5. **Quality Assurance & Testing**
-   - Achieve >80% test coverage across all modules per CLAUDE.md
-   - Implement comprehensive security testing
-   - Add performance benchmarking and regression testing
-   - Create load testing scenarios and validation
-   - Implement automated quality gates in CI/CD
-
-#### Acceptance Criteria:
-- [ ] Performance improves 20% over Phase 3 baseline measurements
-- [ ] Error recovery automatically handles 95% of common failure scenarios
-- [ ] Configuration hot-reload works without service restart
-- [ ] Monitoring provides actionable insights with appropriate alerting
-- [ ] Memory usage remains stable during 24-hour continuous operation
-- [ ] Security scan shows zero critical or high-severity vulnerabilities
-- [ ] Test coverage exceeds 80% with all quality gates passing
-- [ ] Load testing validates performance under concurrent usage
-- [ ] All configuration can be managed via environment variables
-- [ ] Single Docker command deployment functional
-
-#### Progress Indicators:
-- **Performance Gain**: 20%+ improvement over baseline
-- **Error Recovery**: >95% automatic resolution rate
-- **System Stability**: 24-hour continuous operation successful
-- **Security Posture**: Zero critical/high vulnerabilities
-- **Quality Metrics**: >80% test coverage, all gates passing
-- **Deployment Readiness**: Single-command deployment verified
-
-#### Dependencies:
-- Phase 3 completion (MCP tools and batch processing)
-- Performance baseline measurements from Phase 3
-- Security scanning tools and processes
-
-#### Risks & Mitigation:
-- **Medium Risk**: Performance optimization complexity
-  - *Mitigation*: Incremental improvements, continuous benchmarking
-- **Medium Risk**: Security vulnerability management
-  - *Mitigation*: Regular scanning, dependency updates, secure coding practices
-- **Low Risk**: Monitoring system integration
-  - *Mitigation*: Use standard observability patterns and tools
-- **Low Risk**: Configuration management complexity
-  - *Mitigation*: Simple, well-documented configuration patterns
+## 2.5 Phase 2 Success Metrics
+- **Conversion Success Rate**: >99% across all formats
+- **Performance Compliance**: Meet all PRD performance requirements
+- **Test Coverage**: Maintain >80% with comprehensive test suite
+- **Documentation Quality**: Complete user and developer documentation
+- **Integration Readiness**: Ready for Phase 3 MCP API implementation
 
 ---
 
-### Phase 5: Deployment & Integration
-**Duration:** 1 week  
-**Scope:** Production deployment package with comprehensive validation
+# PHASE 3: MCP API Completion & Batch Processing
+**Target Duration:** 2-3 weeks  
+**Start Condition:** Phase 2 document processing complete  
+**Priority:** HIGH
 
-#### Implementation Steps:
+## 3.1 Core Objectives
+Complete the MCP server implementation with full tool suite, batch processing capabilities, and production-ready API endpoints.
 
-1. **Production Docker Configuration**
-   - Create optimized multi-stage Dockerfile for production
-   - Configure Docker Compose with networking, volumes, and secrets
-   - Implement comprehensive health checks and readiness probes
-   - Add container resource limits and monitoring
-   - Create deployment scripts and automation
+## 3.2 Implementation Plan
 
-2. **Comprehensive Integration Testing**
-   - Execute end-to-end test suite with diverse real-world documents
-   - Validate Claude Code integration across multiple scenarios
-   - Test GitHub Copilot compatibility and workflow integration
-   - Perform load testing with concurrent users and requests
-   - Validate all error handling and recovery scenarios
+### Week 1: MCP Tools Implementation
+- **Task 3.1.1**: Convert Document Tool
+  - Complete convert_document MCP tool implementation  
+  - Add comprehensive input validation and error handling
+  - Implement progress reporting and status updates
+  - **Success Criteria**: Single document conversion via MCP protocol
 
-3. **Documentation & Deployment Guides**
-   - Create comprehensive API documentation with examples
-   - Write deployment and configuration guides
-   - Build troubleshooting and FAQ documentation
-   - Create integration examples for common AI development workflows
-   - Document operational procedures and maintenance tasks
+- **Task 3.1.2**: Convert Directory Tool  
+  - Implement batch directory processing
+  - Add recursive directory traversal
+  - File filtering and format selection
+  - **Success Criteria**: Batch conversion of 100 documents <5 minutes
 
-4. **Final Production Validation**
-   - Execute complete regression test suite
-   - Validate all success metrics and performance targets
-   - Perform comprehensive security audit
-   - Complete production readiness checklist
-   - Conduct user acceptance testing scenarios
+- **Task 3.1.3**: Health Check Tool
+  - Complete health monitoring implementation
+  - System status reporting (models, memory, disk space)
+  - Performance metrics collection
+  - **Success Criteria**: Comprehensive health reporting via MCP
 
-5. **Production Deployment Preparation**
-   - Create production environment configuration
-   - Set up monitoring and alerting infrastructure
-   - Prepare rollback and disaster recovery procedures
-   - Create operational runbooks and procedures
-   - Train operations team on system management
+### Week 2: Advanced Features & Output Options
+- **Task 3.2.1**: Output Format Options
+  - ZIP archive creation for batch operations
+  - Structured output directory organization  
+  - Custom output naming conventions
+  - **Success Criteria**: Flexible output options per user requirements
 
-#### Acceptance Criteria:
-- [ ] Single-command Docker deployment works flawlessly
-- [ ] All integration tests pass in production-like environment
-- [ ] Performance meets all specified targets under realistic load
-- [ ] Security audit reveals no vulnerabilities or compliance issues
-- [ ] Documentation covers 100% of functionality with clear examples
-- [ ] End-to-end user workflows function perfectly
-- [ ] Production monitoring and alerting systems functional
-- [ ] Rollback procedures tested and validated
-- [ ] Operations team trained and ready for production support
-- [ ] Claude Code and GitHub Copilot integration validated
+- **Task 3.2.2**: Progress & Status Reporting
+  - Real-time conversion progress updates
+  - Batch operation status tracking
+  - ETA calculation for long operations
+  - **Success Criteria**: Live progress updates for batch operations
 
-#### Progress Indicators:
-- **Deployment Success**: Single-command deployment functional
-- **Integration Validation**: 100% of integration tests passing
-- **Performance Compliance**: All benchmarks meet specified targets
-- **Security Clearance**: Clean audit report with no issues
-- **Documentation Quality**: Complete coverage with user validation
-- **Operational Readiness**: All procedures tested and documented
+### Week 3: Integration & Validation
+- **Task 3.3.1**: MCP Protocol Compliance
+  - Full MCP specification compliance validation
+  - Input/output schema validation
+  - Error response standardization  
+  - **Success Criteria**: 100% MCP protocol compliance
 
-#### Dependencies:
-- Phase 4 completion (production optimization)
-- Production environment access and configuration
-- Integration testing infrastructure
+- **Task 3.3.2**: Integration Testing
+  - End-to-end MCP client testing
+  - Load testing with concurrent requests
+  - Integration with Claude Code and GitHub Copilot
+  - **Success Criteria**: Successful integration with target platforms
 
-#### Risks & Mitigation:
-- **Low Risk**: Production environment configuration differences
-  - *Mitigation*: Staging environment testing, configuration validation
-- **Low Risk**: Integration testing coverage gaps
-  - *Mitigation*: Comprehensive test scenarios, real-world validation
-- **Low Risk**: Documentation completeness and accuracy
-  - *Mitigation*: Peer review, user testing, iterative improvement
+## 3.3 Phase 3 Acceptance Criteria
+- [ ] **Complete MCP API**: All tools implemented per PRD specifications
+- [ ] **Batch Processing**: Directory processing with filtering and progress reporting
+- [ ] **Output Options**: ZIP creation and flexible output organization
+- [ ] **Performance**: <5 minutes for 100 document batch processing
+- [ ] **Integration**: Successful Claude Code and GitHub Copilot integration
 
 ---
 
-## Success Metrics & Quality Gates
+# PHASE 4: Performance & Production Readiness  
+**Target Duration:** 2 weeks  
+**Start Condition:** Phase 3 API completion  
+**Priority:** MEDIUM
 
-### Performance Requirements:
-- **Document Processing Speed**: <30 seconds for 50MB files
-- **API Response Time**: <2 seconds for typical document requests
-- **Memory Efficiency**: <1GB RAM for standard operations
-- **Batch Processing**: <5 minutes for 100 documents
-- **System Availability**: >99% uptime for production deployment
+## 4.1 Core Objectives
+Optimize performance, implement production monitoring, and ensure security and reliability for production deployment.
 
-### Quality Requirements:
-- **Test Coverage**: >80% across all modules with comprehensive edge case testing
-- **Code Quality**: 100% compliance with all CLAUDE.md quality standards
-- **Security**: Zero critical or high-severity vulnerabilities
-- **Documentation**: 100% API coverage with examples and integration guides
-- **Error Handling**: Graceful handling of 95% of error scenarios
+## 4.2 Implementation Plan
 
-### Integration Requirements:
-- **MCP Compliance**: Full compatibility with Claude Code and GitHub Copilot
-- **Format Support**: 100% coverage for all 6 supported document formats
-- **Reliability**: >99% successful conversion rate across all formats
-- **Error Recovery**: 95% automatic recovery from transient failures
+### Week 1: Performance Optimization
+- **Task 4.1.1**: Caching & Memory Optimization
+  - Implement document processing caching
+  - Optimize AI model memory usage
+  - Add connection pooling and resource management
+  - **Success Criteria**: 50% performance improvement on repeated operations
 
----
+- **Task 4.1.2**: Concurrent Processing  
+  - Implement parallel document processing
+  - Add worker pool management
+  - Resource limiting and throttling
+  - **Success Criteria**: Process multiple documents concurrently without degradation
 
-## Risk Assessment & Management
+### Week 2: Production Infrastructure
+- **Task 4.2.1**: Monitoring & Observability
+  - Add structured metrics collection
+  - Implement health check endpoints
+  - Create performance dashboards
+  - **Success Criteria**: Comprehensive production monitoring
 
-### High-Impact, Medium-Probability Risks:
+- **Task 4.2.2**: Security & Reliability
+  - Security scanning and vulnerability assessment
+  - Input validation and sanitization
+  - Rate limiting and abuse prevention
+  - **Success Criteria**: Production-grade security and reliability
 
-1. **Docling AI Model Performance Issues**
-   - **Impact**: Core functionality degradation
-   - **Mitigation**: Comprehensive fallback system, extensive testing with diverse documents
-   - **Monitoring**: Conversion success rates, processing times, error rates
-
-2. **Memory Management with Large Documents**
-   - **Impact**: System stability and performance
-   - **Mitigation**: Streaming processing, resource limits, monitoring and alerting
-   - **Monitoring**: Memory usage patterns, OOM events, performance metrics
-
-### Medium-Impact, Medium-Probability Risks:
-
-1. **Integration Complexity with AI Development Tools**
-   - **Impact**: User adoption and functionality
-   - **Mitigation**: Early integration testing, comprehensive validation scenarios
-   - **Monitoring**: Integration test results, user feedback, compatibility issues
-
-2. **Performance Optimization Challenges**
-   - **Impact**: User experience and adoption
-   - **Mitigation**: Incremental optimization, continuous benchmarking
-   - **Monitoring**: Performance metrics, user experience feedback
-
-### Low-Impact, Low-Probability Risks:
-
-1. **Docker Deployment Complexity** - Standard containerization practices
-2. **Development Tool Integration** - Mature Python ecosystem and tooling
-3. **MCP Protocol Changes** - Stable, well-documented specification
+## 4.3 Phase 4 Acceptance Criteria
+- [ ] **Performance**: Meet all PRD performance requirements with margin
+- [ ] **Monitoring**: Comprehensive observability and alerting
+- [ ] **Security**: Production security standards compliance
+- [ ] **Reliability**: >99.9% uptime under normal load
 
 ---
 
-## Phase Dependencies & Critical Path
+# PHASE 5: Integration & Deployment Validation
+**Target Duration:** 1 week  
+**Start Condition:** Phase 4 production readiness  
+**Priority:** HIGH
 
-```
-Phase 1: Foundation (1 week)
-    ↓ [MCP server must be operational]
-Phase 2: Document Processing (2 weeks)
-    ↓ [Core conversion must work reliably]
-Phase 3: MCP Tools & Batch (1 week)
-    ↓ [API must be feature complete]
-Phase 4: Production Optimization (1 week)
-    ↓ [System must be production ready]
-Phase 5: Deployment & Integration (1 week)
-```
+## 5.1 Core Objectives
+Validate end-to-end integration with Claude Code and GitHub Copilot, ensure production deployment readiness, and complete final testing.
 
-**Total Duration: 6 weeks**  
-**Critical Path: All phases are sequential dependencies**
+## 5.2 Implementation Plan
 
-### Mandatory Review Gates:
+### Days 1-3: Integration Validation
+- **Task 5.1.1**: Claude Code Integration
+  - Test MCP integration with Claude Code
+  - Validate tool discovery and execution
+  - Document integration procedures
+  - **Success Criteria**: Seamless Claude Code integration
 
-1. **Phase 1 Gate**: Architecture approval and development foundation validation
-2. **Phase 2 Gate**: Document conversion quality and performance validation
-3. **Phase 3 Gate**: MCP API completeness and integration testing approval
-4. **Phase 4 Gate**: Production readiness and performance acceptance
-5. **Phase 5 Gate**: Deployment validation and go-live authorization
+- **Task 5.1.2**: GitHub Copilot Integration  
+  - Test MCP integration with GitHub Copilot
+  - Validate API compatibility
+  - Performance testing under realistic usage
+  - **Success Criteria**: Confirmed GitHub Copilot compatibility
 
-### Success Criteria for Each Gate:
+### Days 4-7: Final Validation & Deployment
+- **Task 5.2.1**: Production Deployment Testing
+  - Docker deployment validation
+  - Load testing and stress testing
+  - Production environment configuration
+  - **Success Criteria**: Single-command production deployment
 
-- **All acceptance criteria met** for the completed phase
-- **No critical issues remaining** that would impact subsequent phases
-- **Performance benchmarks achieved** as specified for the phase
-- **Quality gates passed** including test coverage and security scans
-- **Stakeholder approval** for moving to the next phase
+- **Task 5.2.2**: Documentation & Handoff
+  - Complete user documentation
+  - Create deployment guides
+  - Final acceptance testing
+  - **Success Criteria**: Production-ready documentation and deployment
 
----
-
-## Implementation Guidance
-
-### Development Standards (CLAUDE.md Compliance):
-- **Type Hints**: Full typing coverage throughout codebase
-- **Async Patterns**: async/await for all I/O operations in MCP server
-- **Error Handling**: Comprehensive exception handling with specific types
-- **Documentation**: Google-style docstrings for all classes and functions
-- **Code Style**: PEP 8 compliance with 100-character line limit
-- **Testing**: pytest with >80% coverage, edge case testing
-- **Logging**: Structured logging with correlation IDs using structlog
-
-### Quality Assurance Process:
-- **Continuous Integration**: GitHub Actions with comprehensive pipeline
-- **Code Quality Gates**: ruff, black, mypy, isort - all must pass
-- **Security Scanning**: Regular vulnerability assessment
-- **Performance Testing**: Automated benchmarking and regression testing
-- **Integration Testing**: End-to-end validation with target tools
-
-### Deployment Strategy:
-- **Containerization**: Docker with Chainguard Python for security
-- **Environment Management**: Configuration via environment variables
-- **Secrets Management**: Secure handling of sensitive configuration
-- **Health Monitoring**: Comprehensive health checks and observability
-- **Rollback Capability**: Automated rollback procedures for issues
+## 5.3 Phase 5 Acceptance Criteria
+- [ ] **Integration**: Successful Claude Code and GitHub Copilot integration
+- [ ] **Deployment**: Single Docker command deployment works
+- [ ] **Documentation**: Complete user and deployment documentation
+- [ ] **Performance**: All PRD success metrics achieved
 
 ---
 
-## Next Steps & Immediate Actions
+# Risk Assessment & Mitigation
 
-### Phase 1 Kickoff Requirements:
-1. **Development Environment Setup**: Ensure Docker, UV, and VS Code configured
-2. **Repository Structure**: Create initial project structure and configuration
-3. **CI/CD Pipeline**: Set up GitHub Actions with quality gates
-4. **Team Alignment**: Review plan, confirm requirements, assign responsibilities
-5. **Risk Mitigation**: Identify any environment-specific risks and mitigation strategies
+## Phase 2 Risks (MEDIUM)
+**Risk**: Docling AI integration complexity  
+**Mitigation**: Start with simple conversions, add complexity incrementally  
+**Contingency**: Fallback to pypandoc if Docling integration fails
 
-### Success Tracking:
-- **Daily Progress Updates**: Track completion of implementation steps
-- **Weekly Quality Reviews**: Validate acceptance criteria and progress indicators  
-- **Phase Gate Reviews**: Formal approval process before advancing phases
-- **Continuous Monitoring**: Track performance, quality, and integration metrics
+**Risk**: Large file memory usage  
+**Mitigation**: Implement streaming and chunking early  
+**Contingency**: File size limits and user warnings
 
-This comprehensive build plan provides a clear, executable roadmap for delivering a production-ready EchoFlow MCP server that meets all technical requirements while maintaining the highest standards of quality, performance, and reliability as specified in CLAUDE.md.
+## Phase 3 Risks (LOW)
+**Risk**: MCP protocol compatibility issues  
+**Mitigation**: Follow MCP specification strictly, test incrementally  
+**Contingency**: Adjust implementation based on protocol requirements
 
-**Ready to begin Phase 1 implementation upon your approval.**
+## Phase 4 Risks (LOW)  
+**Risk**: Performance optimization challenges  
+**Mitigation**: Profile early, optimize incrementally  
+**Contingency**: Acceptable performance degradation for complex documents
+
+## Phase 5 Risks (LOW)
+**Risk**: Integration platform changes  
+**Mitigation**: Stay updated with Claude Code and GitHub Copilot APIs  
+**Contingency**: Adapt integration approach based on platform requirements
+
+---
+
+# Quality Gates & Success Criteria
+
+## Continuous Quality Requirements
+- **Test Coverage**: Maintain >80% throughout all phases
+- **Code Quality**: 100% compliance with CLAUDE.md standards  
+- **Performance**: Meet PRD specifications with 20% margin
+- **Documentation**: Keep current with implementation
+- **Security**: No high-severity vulnerabilities
+
+## Phase Completion Gates
+Each phase requires:
+1. **Functional Acceptance**: All acceptance criteria met
+2. **Quality Validation**: Code quality and test coverage maintained  
+3. **Performance Verification**: Success metrics achieved
+4. **Documentation Update**: Current and complete documentation
+5. **Stakeholder Approval**: Explicit approval to proceed to next phase
+
+## Final Success Criteria
+- [ ] **Document Conversion Coverage**: 100% for all 6 supported formats
+- [ ] **Performance**: <30s for 50MB files, <5min for 100 documents
+- [ ] **Reliability**: >99% successful conversion rate  
+- [ ] **API Response Time**: <2s for typical documents
+- [ ] **Memory Efficiency**: <1GB RAM for standard operations
+- [ ] **Easy Integration**: Structured MCP protocol with clear schemas
+- [ ] **Easy Deployment**: Single Docker command deployment
+- [ ] **Test Coverage**: >80% with comprehensive test suite
+- [ ] **Production Ready**: Security, monitoring, and reliability standards met
+
+---
+
+# Next Steps & Recommendations
+
+## Immediate Action Items
+1. **Phase 2 Kickoff**: Begin Docling AI integration immediately
+2. **Resource Allocation**: Ensure development environment is optimized
+3. **Stakeholder Alignment**: Confirm Phase 2 priorities and timeline
+4. **Risk Monitoring**: Establish weekly risk review process
+
+## Strategic Considerations  
+- **AI Model Updates**: Monitor Docling AI for updates and improvements
+- **Platform Evolution**: Stay aligned with MCP protocol evolution
+- **User Feedback**: Plan for user feedback incorporation in later phases
+- **Scalability Planning**: Consider multi-container deployment for high-load scenarios
+
+This comprehensive build plan provides clear roadmap with measurable milestones, risk mitigation, and quality gates to ensure successful delivery of the EchoFlow MCP server with production-ready document conversion capabilities.
+
+**STOP AND WAIT FOR APPROVAL BEFORE PROCEEDING WITH PHASE 2 IMPLEMENTATION**

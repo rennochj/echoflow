@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  echoflow:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: echoflow-mcp
+    environment:
+      - ECHOFLOW_LOG_LEVEL=INFO
+      - ECHOFLOW_MAX_FILE_SIZE=52428800  # 50MB
+      - ECHOFLOW_TEMP_DIR=/tmp/echoflow
+      - ECHOFLOW_CACHE_ENABLED=true
+      - ECHOFLOW_CACHE_TTL=3600
+    volumes:
+      # Mount for document processing
+      - ./data:/app/data
+      # Temporary processing directory
+      - echoflow_temp:/tmp/echoflow
+      # Cache volume for AI models
+      - echoflow_cache:/app/.cache
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import asyncio; import sys; sys.path.insert(0, '/app/src'); from echoflow.server.health import health_check; asyncio.run(health_check())"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1.0'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
+
+volumes:
+  echoflow_temp:
+    driver: local
+  echoflow_cache:
+    driver: local

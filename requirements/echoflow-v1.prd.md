@@ -1,6 +1,6 @@
 # 📱 Simple PRD Template
 
-**Product:** `Eventflow`  
+**Product:** `EchoFlow`  
 **Owner:** `Jim Conner`  
 **Date:** `8/10/2025`
 
@@ -103,6 +103,27 @@ I want to use this to integrate with coding assistance tools and other generativ
 - Container resource limits and monitoring
 - Backup and recovery procedures
 - Production logging and alerting
+
+### Build Automation
+- Makefile for task automation (e.g. test execution, linting, etc.)
+- Docker Compose for multi-container setups
+- CI/CD integration with GitHub Actions
+
+### Documentation Structure & Standards
+- **README.md**: Public-facing project documentation for end users
+  - Project overview and core features
+  - Quick start guide and installation instructions
+  - Basic usage examples and API documentation links
+  - License and contribution information
+  - Reference to DEVELOPMENT.md for developers
+- **DEVELOPMENT.md**: Internal developer workflow and contribution guide (separate from README.md)
+  - Comprehensive development workflows and coding standards
+  - Quality gate procedures and testing strategies
+  - Detailed debugging and profiling guides
+  - Phase-specific development guidelines
+  - Advanced tooling and environment setup
+- **CLAUDE.md**: AI assistant behavioral guidelines and code standards
+- **Separation Rationale**: Keep documentation focused - README.md serves users while DEVELOPMENT.md serves developers, following standard open source practices
 
 ## 🚫 What we're NOT building
 

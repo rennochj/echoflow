@@ -90,6 +90,9 @@ mypy .
 - **Documentation**: Sphinx for generating documentation
 - **Async I/O**: asyncio for asynchronous operations
 - **MCP Protocol**: FastMCP for handling Model Context Protocol interactions
+- **Typing**: Python's typing module for type hints and static type checking
+- **Data Validation**: Pydantic for data validation and settings management
+- **Build Automation**: make for build automation and task management
 
 ## Code Architecture
 
