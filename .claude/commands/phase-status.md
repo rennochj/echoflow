@@ -3,6 +3,9 @@ description: Check current phase progress and status
 allowed-tools: Read, Bash(git status), Bash(git log --oneline -10)
 ---
 
+Switch to Sonnet for architectural planning:
+/model sonnet-4
+
 # Phase Status Report
 
 You are providing a status update on the current development phase.
@@ -20,4 +23,4 @@ You are providing a status update on the current development phase.
 ### 📊 PHASE STATUS REPORT
 **Date:** [Current date]  
 **Active Phase:** [Phase number and name]  
-**Overall Progress:** [Percentage comp
+**Overall Progress:** [Percentage complete]

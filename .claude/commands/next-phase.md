@@ -3,6 +3,9 @@ description: Transition to next development phase with validation
 allowed-tools: Read, Write, Bash(git status), Bash(git log --oneline -10)
 ---
 
+Switch to Sonnet for architectural planning:
+/model sonnet-4
+
 # Next Phase Transition
 
 You are managing the transition from the current phase to the next phase in the development plan.
