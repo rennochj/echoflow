@@ -290,8 +290,10 @@ class DoclingConverter(BaseConverter):
         try:
             logger.info("Cleaning up DoclingConverter resources")
             await self.model_manager.cleanup()
-            self._initialized = False
             logger.info("DoclingConverter cleanup completed")
 
         except Exception as e:
             logger.error("Error during DoclingConverter cleanup", error=str(e))
+        finally:
+            # Always reset initialization state, even if cleanup fails
+            self._initialized = False

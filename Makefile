@@ -10,6 +10,7 @@ help:
 	@echo "  test        Run all tests with coverage"
 	@echo "  test-unit   Run unit tests only"  
 	@echo "  test-integration  Run integration tests only"
+	@echo "  test-phase2 Test Phase 2 AI capabilities (quick validation)"
 	@echo "  lint        Run code linting (ruff)"
 	@echo "  format      Format code (ruff format, isort)"
 	@echo "  type-check  Run type checking (mypy)"
@@ -20,9 +21,13 @@ help:
 	@echo "  benchmark   Run performance benchmarks"
 	@echo ""
 	@echo "Docker:"
-	@echo "  docker-build     Build Docker image"
-	@echo "  docker-run       Run Docker container"
-	@echo "  docker-test      Test Docker container"
+	@echo "  docker-build         Build Docker image"
+	@echo "  docker-run           Run Docker container interactively"
+	@echo "  docker-run-detached  Run Docker container in background"
+	@echo "  docker-test          Test Docker container with Phase 2 capabilities"
+	@echo "  docker-shell         Open shell in Docker container"
+	@echo "  docker-logs          Show logs from running container"
+	@echo "  docker-stop          Stop and remove running container"
 	@echo ""
 	@echo "Deployment:"
 	@echo "  clean       Clean build artifacts"
@@ -45,6 +50,10 @@ test-unit:
 
 test-integration:
 	$(VENV_ACTIVATE) && python -m pytest tests/integration/ -v --tb=short
+
+test-phase2:
+	@echo "🧪 Running Phase 2 comprehensive tests..."
+	$(VENV_ACTIVATE) && python scripts/test_phase2.py
 
 # Code quality targets  
 lint:
@@ -76,8 +85,21 @@ docker-build:
 docker-run:
 	docker run --rm -it -p 3000:3000 echoflow:latest
 
+docker-run-detached:
+	docker run -d --name echoflow-server -p 3000:3000 echoflow:latest
+
+docker-logs:
+	docker logs echoflow-server
+
+docker-stop:
+	docker stop echoflow-server && docker rm echoflow-server
+
+docker-shell:
+	docker run --rm -it --entrypoint=/bin/sh echoflow:latest
+
 docker-test:
-	docker run --rm --entrypoint="" echoflow:latest /bin/sh -c "cd /app && /usr/bin/python3 -c 'import sys; sys.path.insert(0, \"src\"); import echoflow; print(\"✅ Docker build successful\")'"
+	@echo "🐳 Running comprehensive EchoFlow Docker tests..."
+	docker run --rm --entrypoint="" echoflow:latest python3 /app/scripts/docker_test.py
 
 # Cleanup
 clean:

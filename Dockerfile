@@ -9,6 +9,7 @@ WORKDIR /app
 # Copy dependency files
 COPY pyproject.toml README.md ./
 COPY src/ ./src/
+COPY scripts/ ./scripts/
 
 # Install UV package manager
 RUN pip install --user uv
@@ -31,8 +32,9 @@ ENV PYTHONPATH="/app/src"
 
 WORKDIR /app
 
-# Copy application source
+# Copy application source and scripts
 COPY --from=builder /app/src /app/src
+COPY --from=builder /app/scripts /app/scripts
 COPY --from=builder /app/pyproject.toml /app/README.md ./
 
 # Install UV and application using system Python

@@ -213,15 +213,17 @@ class TestHealthCheck:
             assert result == "degraded"
 
     @pytest.mark.asyncio
-    @pytest.mark.skip(reason="AI models not available in Phase 1 - will be implemented in Phase 2")
     async def test_check_ai_models_health_import_error(self):
         """Test AI models health check with import error."""
-        # This test will be enabled in Phase 2 when AI models are implemented
-        pass
+        with patch("builtins.__import__", side_effect=ImportError("AI models not available")):
+            result = await _check_ai_models_health()
+
+            assert result == "not_initialized"
 
     @pytest.mark.asyncio
-    @pytest.mark.skip(reason="AI models not available in Phase 1 - will be implemented in Phase 2")
     async def test_check_ai_models_health_exception(self):
         """Test AI models health check with exception."""
-        # This test will be enabled in Phase 2 when AI models are implemented
-        pass
+        with patch("echoflow.ai.model_manager.ModelManager", side_effect=Exception("AI error")):
+            result = await _check_ai_models_health()
+
+            assert result == "unhealthy"
